@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TODO list{% endblock %}
+
+{% block body %}
+    <h2>List</h2>
+    <p><a href="{{ path('add') }}"><button class="btn btn-primary">Add new TODO</button></a></p>
+    <table class="table table-hover">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Added date</th>
+            <th>Realised?</th>
+            <th>Actions</th>
+        </tr>
+        {% for todo in list %}
+            <tr>
+                <td>{{ todo.title }}</td>
+                <td>{{ todo.description }}</td>
+                <td>{{ todo.addedDate|date('d-m-Y H:i') }}</td>
+                <td>
+                    {% if todo.realised == 1 %}
+                        <span class="label label-success">Yes</span>
+                    {% else %}
+                        <span class="label label-danger">No</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if todo.realised == 1 %}
+                        <button class="btn btn-danger btn-xs">Set as unrealised</button>
+                    {% else %}
+                        <button class="btn btn-success btn-xs">Set as realised</button>
+                    {% endif %}
+                    <button class="btn btn-default btn-xs">Edit</button>
+                    <button class="btn btn-default btn-xs">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
