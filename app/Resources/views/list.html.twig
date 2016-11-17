@@ -27,12 +27,17 @@
                 </td>
                 <td>
                     {% if todo.realised == 1 %}
-                        <button class="btn btn-danger btn-xs">Set as unrealised</button>
+                        <a href="{{ path('realised', {'id': todo.id, 'action': 'unrealised'}) }}">
+                            <button class="btn btn-danger btn-xs">Set as unrealised</button></a>
                     {% else %}
-                        <button class="btn btn-success btn-xs">Set as realised</button>
+                        <a href="{{ path('realised', {'id': todo.id, 'action': 'realised'}) }}">
+                            <button class="btn btn-success btn-xs">Set as realised</button></a>
                     {% endif %}
-                    <button class="btn btn-default btn-xs">Edit</button>
-                    <button class="btn btn-default btn-xs">Delete</button>
+                    <a href="{{ path('edit', {'id': todo.id}) }}">
+                        <button class="btn btn-default btn-xs">Edit</button></a>
+                    <a href="{{ path('delete', {'id': todo.id}) }}">
+                        <button class="btn btn-default btn-xs">Delete</button>
+                    </a>
                 </td>
             </tr>
         {% endfor %}

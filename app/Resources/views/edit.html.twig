@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block title %}TODO edit{% endblock %}
+
+{% block body %}
+    <h2>Edit</h2>
+    <p><a href="{{ path('list') }}"><button class="btn btn-primary">Back to list</button></a></p>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}
