@@ -10,9 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class TodoController extends Controller
 {
-    /**
-     * @Route("/", name="list")
-     */
     public function listAction()
     {
         $list = $this->getDoctrine()->getRepository('TodoBundle:Todo')->findBy([], ['addedDate' => 'DESC']);
@@ -21,9 +18,6 @@ class TodoController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/add", name="add")
-     */
     public function addAction(Request $request)
     {
         $todo = new Todo();
@@ -44,9 +38,6 @@ class TodoController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/edit/{id}", name="edit", requirements={"id": "\d+"})
-     */
     public function editAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -70,16 +61,6 @@ class TodoController extends Controller
         ]);
     }
 
-    /**
-     * @Route(
-     *     "/edit/{id}/{action}",
-     *     name="realised",
-     *     requirements={
-     *        "id": "\d+",
-     *        "action": "realised|unrealised"
-     *     }
-     * )
-     */
     public function realisedAction($id, $action)
     {
         $em = $this->getDoctrine()->getManager();
@@ -92,9 +73,6 @@ class TodoController extends Controller
         return $this->redirect($this->generateUrl('list'));
     }
 
-    /**
-     * @Route("/delete/{id}", name="delete")
-     */
     public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
