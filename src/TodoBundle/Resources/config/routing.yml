@@ -1,0 +1,26 @@
+list:
+  path: /
+  defaults: { _controller: TodoBundle:Todo:list }
+
+add:
+  path: /add
+  defaults: { _controller: TodoBundle:Todo:add }
+
+edit:
+  path: /edit/{id}
+  defaults: { _controller: TodoBundle:Todo:edit }
+  requirements:
+    id: '\d+'
+
+realised:
+  path: /edit/{id}/{action}
+  defaults: { _controller: TodoBundle:Todo:realised }
+  requirements:
+    id: '\d+'
+    action: 'realised|unrealised'
+
+delete:
+  path: /delete/{id}
+  defaults: { _controller: TodoBundle:Todo:delete }
+  requirements:
+    id: '\d+'
