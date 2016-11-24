@@ -21,7 +21,7 @@ class UserController extends Controller
             $em->flush();
             return $this->redirectToRoute('list');
         }
-        return $this->render('TodoBundle::register.html.twig', [
+        return $this->render('TodoBundle:User:register.html.twig', [
             'form' => $form->createView()
         ]);
     }

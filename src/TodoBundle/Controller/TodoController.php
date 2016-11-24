@@ -12,7 +12,7 @@ class TodoController extends Controller
     public function listAction()
     {
         $list = $this->getDoctrine()->getRepository('TodoBundle:Todo')->findBy([], ['addedDate' => 'DESC']);
-        return $this->render('TodoBundle::list.html.twig', [
+        return $this->render('TodoBundle:Todo:list.html.twig', [
             'list' => $list
         ]);
     }
@@ -28,7 +28,7 @@ class TodoController extends Controller
             $em->flush();
             return $this->redirectToRoute('list');
         }
-        return $this->render('TodoBundle::add.html.twig', [
+        return $this->render('TodoBundle:Todo:add.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -47,7 +47,7 @@ class TodoController extends Controller
             $em->flush();
             return $this->redirectToRoute('list');
         }
-        return $this->render('TodoBundle::edit.html.twig', [
+        return $this->render('TodoBundle:Todo:edit.html.twig', [
             'form' => $form->createView()
         ]);
     }
