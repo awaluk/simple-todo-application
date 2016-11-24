@@ -24,3 +24,14 @@ delete:
   defaults: { _controller: TodoBundle:Todo:delete }
   requirements:
     id: '\d+'
+
+register:
+  path: /register
+  defaults: { _controller: TodoBundle:User:register }
+
+login:
+  path: /login
+  defaults: { _controller: TodoBundle:Security:login }
+
+logout:
+  path: /logout

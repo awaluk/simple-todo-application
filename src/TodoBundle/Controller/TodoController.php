@@ -5,7 +5,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use TodoBundle\Entity\Todo;
 use TodoBundle\Form\TodoType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class TodoController extends Controller
@@ -22,16 +21,12 @@ class TodoController extends Controller
     {
         $todo = new Todo();
         $form = $this->createForm(TodoType::class, $todo);
-        $form->add('add', SubmitType::class, [
-            'label' => 'Add new TODO',
-        ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist($data);
+            $em->persist($todo);
             $em->flush();
-            return $this->redirect($this->generateUrl('list'));
+            return $this->redirectToRoute('list');
         }
         return $this->render('TodoBundle::add.html.twig', [
             'form' => $form->createView()
@@ -46,15 +41,11 @@ class TodoController extends Controller
             throw $this->createNotFoundException('TODO does not exist!');
         }
         $form = $this->createForm(TodoType::class, $todo);
-        $form->add('add', SubmitType::class, [
-            'label' => 'Save this TODO',
-        ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $em->persist($data);
+            $em->persist($todo);
             $em->flush();
-            return $this->redirect($this->generateUrl('list'));
+            return $this->redirectToRoute('list');
         }
         return $this->render('TodoBundle::edit.html.twig', [
             'form' => $form->createView()
@@ -70,7 +61,7 @@ class TodoController extends Controller
         }
         $todo->setRealised($action === 'realised');
         $em->flush();
-        return $this->redirect($this->generateUrl('list'));
+        return $this->redirectToRoute('list');
     }
 
     public function deleteAction($id)
@@ -82,6 +73,6 @@ class TodoController extends Controller
         }
         $em->remove($todo);
         $em->flush();
-        return $this->redirect($this->generateUrl('list'));
+        return $this->redirectToRoute('list');
     }
 }

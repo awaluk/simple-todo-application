@@ -3,6 +3,15 @@
 {% block title %}TODO list{% endblock %}
 
 {% block body %}
+    <h2>Account</h2>
+    <p>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            Hi, {{ app.user.username }}! <a href="{{ path('logout') }}"><button class="btn btn-primary">Logout</button></a>
+        {% else %}
+            <a href="{{ path('login') }}"><button class="btn btn-primary">Login</button></a>
+            <a href="{{ path('register') }}"><button class="btn btn-primary">Register</button></a>
+        {% endif %}
+    </p>
     <h2>List</h2>
     <p><a href="{{ path('add') }}"><button class="btn btn-primary">Add new TODO</button></a></p>
     <table class="table table-hover">
